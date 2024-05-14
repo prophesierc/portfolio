@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'Overseer Bold Italic'; 
+    src: url('/assets/fonts/Overseer\ Bold\ Italic.otf'); 
+}
+@font-face {
+    font-family: 'Overseer Bold'; 
+    src: url('/assets/fonts/Overseer\ Bold.otf'); 
+}
+@font-face {
+    font-family: 'Overseer Italic'; 
+    src: url('/assets/fonts/Overseer\ Italic.otf'); 
+}
+@font-face {
+    font-family: 'Overseer'; 
+    src: url('/assets/fonts/Overseer.otf'); 
+}
+
+:root {
+    background-color: black;
+    --color: lime;
+    --size: 1.5;
+    --glow: .3;
+    --background: transparent;
+    --animation: terminal-blink;
+}
+
+.noise {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
+    background-size: cover;
+    opacity: .02;
+}
