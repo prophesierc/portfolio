@@ -1,5 +1,6 @@
-import { helpText, helpMe, enter, hack, whitespace } from './helper.js';
+import { helpText, helpMe, enter, hack, helpTextFunction, main } from './helper.js';
 
+/*
 const term = $('body').terminal(async (command) =>{ 
 
     if (/help/i.test(command) || command == '--h' || command == '-h')
@@ -22,8 +23,9 @@ const term = $('body').terminal(async (command) =>{
                     }, 100);
                 }
             )};   
-        // await term.echo(whitespace, { typing: true, delay: 0});
+        await term.echo(hack, { typing: true, delay: 0});
         // (WIP) allow whitespace to clear screen slowly
+        window.location.assign('root/home.html');
     } 
     else
     {
@@ -37,5 +39,25 @@ const term = $('body').terminal(async (command) =>{
     prompt: '\nguest@prophesierC>'
 
 });
-
+*/
+const commands = 
+{
+    help: helpTextFunction,
+    HELP: helpTextFunction,
+    '--h': helpTextFunction,
+    '-h': helpTextFunction,
+    Enter: main,
+    enter: main,
+    ENTER: main,
+    
+}
+$('body').terminal(commands,
+    {
+        onCommandNotFound: async function(command, term)
+        {
+            command.trim() === '' ? await main.call(this) : this.echo(helpMe, { typing: true, delay: 5 });
+        },
+        greetings: "Prophesierc v4.24 System Status: Online, Stable \nType 'help', '--h', or '-h' to ask for help. \n[[b;red;]ENTER] if you're ready",
+        prompt: '\nguest@prophesierC> '
+    });
 
