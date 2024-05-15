@@ -53,9 +53,9 @@ const commands =
 }
 $('body').terminal(commands,
     {
-        onCommandNotFound: async function(command, term)
+        onCommandNotFound: async function(command)
         {
-            command.trim() === '' ? await main.call(this) : this.echo(helpMe, { typing: true, delay: 5 });
+            command.trim() === "" ? await main.call(this) : this.echo(helpMe, { typing: true, delay: 5 });
         },
         greetings: "Prophesierc v4.24 System Status: Online, Stable \nType 'help', '--h', or '-h' to ask for help. \n[[b;red;]ENTER] if you're ready",
         prompt: '\nguest@prophesierC> '
