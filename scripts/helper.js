@@ -20,6 +20,10 @@ System Diagnostics: ONLINE
 Network Connection: STABLE
 All systems functional. Welcome, Administrator.
 Remember: The only me is me, are you sure the only you is you?`
+export function helpTextFunction() 
+{
+    this.echo(helpText, { typing: true, delay: 5 });
+};
 
 export const helpMe = `It's always okay to ask for [[b;red;]HELP]`;
 
@@ -65,10 +69,3 @@ export const hack =
 0xFD 45S ^@&*%$!          0xFC 46T &#%!$*^@         0xFD 47U !*^$&@#%         0xFC 48V $@#^%&*!
  0xFE 49W &^$!%@#          0xFD 50X !$&@^#%*         0xFE 51Y @#^*!%$&         0xFD 52Z &%!@#^*$`
 
- export const whitespace = (i) => 
- {
-    for(let i = 0; i < 10; i++)
-    {
-        '&nbsp;'.join();
-    }
- }
