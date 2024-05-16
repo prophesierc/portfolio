@@ -1,45 +1,30 @@
-import { helpText, helpMe, enter, hack, helpTextFunction, main } from './helper.js';
+import { helpMe, enter, hack, helpTextFunction } from './helper.js';
 
-/*
-const term = $('body').terminal(async (command) =>{ 
-
-    if (/help/i.test(command) || command == '--h' || command == '-h')
-    {
-        term.echo(helpText, { typing: true, delay: 5 });
-    }
-    
-    else if (/enter/i.test(command) || command == '')
-    {
-        await term.echo(enter, { typing: true, delay: 0});
-        await term.typing('enter', 100, 'sshnuke 10.2.2.2 -rootpw="********"');
-            for (let i = 21; i <= 48; i++)
-            {
-                await new Promise(resolve => 
-                {
-                setTimeout(() => 
-                    {
-                        term.echo(`Grid Node ${i} offline...`);
-                        resolve();
-                    }, 100);
-                }
-            )};   
-        await term.echo(hack, { typing: true, delay: 0});
-        // (WIP) allow whitespace to clear screen slowly
-        window.location.assign('root/home.html');
-    } 
-    else
-    {
-        term.echo(helpMe, { typing: true, delay: 5, newline: true });
-    }
-
-},
+async function matrixNmap()
 {
+    await this.typing('enter', 100, 'sshnuke 10.2.2.2 -rootpw="********"');
+    for (let i = 21; i <= 48; i++)
+    {
+        await new Promise(resolve => 
+        {
+            setTimeout(() => 
+                {
+                    this.echo(`Grid Node ${i} offline...`);
+                    resolve();
+                }, 100);
+        }
+    )};   
+}
 
-    greetings: "Prophesierc v4.24 System Status: Online, Stable \nType 'help', '--h', or '-h' to ask for help. \n[[b;red;]ENTER] if you're ready",
-    prompt: '\nguest@prophesierC>'
+async function main()
+{
+    await this.echo(enter, { typing: true, delay: 0});
+    await matrixNmap.call(this);
+    await this.echo(hack, { typing: true, delay: 0});    
+    scroll_to_bottom()
+    window.location.assign('root/home.html');
+}
 
-});
-*/
 const commands = 
 {
     help: helpTextFunction,
@@ -48,16 +33,26 @@ const commands =
     '-h': helpTextFunction,
     Enter: main,
     enter: main,
-    ENTER: main,
+    ENTER: main
+    
     
 }
-$('body').terminal(commands,
-    {
-        onCommandNotFound: async function(command)
-        {
-            command.trim() === "" ? await main.call(this) : this.echo(helpMe, { typing: true, delay: 5 });
-        },
-        greetings: "Prophesierc v4.24 System Status: Online, Stable \nType 'help', '--h', or '-h' to ask for help. \n[[b;red;]ENTER] if you're ready",
-        prompt: '\nguest@prophesierC> '
-    });
 
+const terminalOptions =
+{
+    greetings: "[[!;;;;https://github.com/prophesierc]ProphesierC] v4.24 System Status: Online, Stable \nType 'help', '--h', or '-h' to ask for help. \n[[b;red;]ENTER] if you're ready",
+    prompt: '\nguest@prophesierC> ',
+    onCommandNotFound: function() { this.echo(helpMe, { typing: true, delay: 0});}
+}
+
+
+let terminal = $('body').terminal(commands, terminalOptions);
+function handleEnterKeyPress(event) 
+{
+    if (event.keyCode === 13 && terminal.get_command().trim() === '') 
+    {
+        main.call(terminal);
+        $('.terminal').off('keydown', handleEnterKeyPress);
+    }
+}
+$('.terminal').on('keydown',handleEnterKeyPress);

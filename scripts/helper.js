@@ -69,22 +69,3 @@ export const hack =
 0xFD 45S ^@&*%$!          0xFC 46T &#%!$*^@         0xFD 47U !*^$&@#%         0xFC 48V $@#^%&*!
  0xFE 49W &^$!%@#          0xFD 50X !$&@^#%*         0xFE 51Y @#^*!%$&         0xFD 52Z &%!@#^*$`
 
-export async function main()
-{
-    await this.echo(enter, { typing: true, delay: 0});
-        await this.typing('enter', 100, 'sshnuke 10.2.2.2 -rootpw="********"');
-            for (let i = 21; i <= 48; i++)
-            {
-                await new Promise(resolve => 
-                {
-                setTimeout(() => 
-                    {
-                        this.echo(`Grid Node ${i} offline...`);
-                        resolve();
-                    }, 100);
-                }
-            )};   
-        await this.echo(hack, { typing: true, delay: 0});
-        // (WIP) allow whitespace to clear screen slowly
-        window.location.assign('root/home.html');
-}
