@@ -1,4 +1,4 @@
-import { helpMe, enter, hack, helpTextFunction } from './helper.js';
+import { helpMe, enter, hackInit, hackFinish, helpTextFunction } from './helper.js';
 
 async function matrixNmap()
 {
@@ -15,14 +15,18 @@ async function matrixNmap()
         }
     )};   
 }
-
+async function home()
+{
+    window.location.assign('root/home.html');
+}
 async function main()
 {
     await this.echo(enter, { typing: true, delay: 0});
     await matrixNmap.call(this);
-    await this.echo(hack, { typing: true, delay: 0});    
-    scroll_to_bottom()
-    window.location.assign('root/home.html');
+    await this.echo(hackInit, { typing: true, delay: 0});  
+    $('body').fadeOut('slow', 'swing')  
+    await this.echo(hackFinish, { typing: true, delay: 0});    
+    home();
 }
 
 const commands = 
@@ -33,9 +37,7 @@ const commands =
     '-h': helpTextFunction,
     Enter: main,
     enter: main,
-    ENTER: main
-    
-    
+    ENTER: main   
 }
 
 const terminalOptions =
@@ -44,6 +46,7 @@ const terminalOptions =
     prompt: '\nguest@prophesierC> ',
     onCommandNotFound: function() { this.echo(helpMe, { typing: true, delay: 0});}
 }
+
 
 
 let terminal = $('body').terminal(commands, terminalOptions);
