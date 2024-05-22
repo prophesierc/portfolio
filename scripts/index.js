@@ -50,7 +50,7 @@ class Terminal
         await this.terminal.echo(hackInit, { typing: true, delay: 0 });
         $('body').fadeOut('slow', 'swing');
         await this.terminal.echo(hackFinish, { typing: true, delay: 0 });
-        window.location.assign('root/home.html');
+        window.location.assign('root/main.html');
     }
 
     handleEnterKeyPress(event) 
@@ -61,7 +61,7 @@ class Terminal
             $('.terminal').off('keydown', this.handleEnterKeyPress);
         }
     }
-    
+
 }
 
 $(document).ready(() => 
