@@ -1,6 +1,18 @@
+@property --main-text-color {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #32CD32;
+}
+
+@property --main-bg-color {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #00040d;
+}
+
 body {
-    background-color: black;
-    color: white;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
     animation: fadeInAnimation ease 3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
